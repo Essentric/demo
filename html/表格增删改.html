@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style>
+			#employeeTable{
+				border: 1px solid gray;
+				border-spacing: 0;
+				margin: 50px auto;
+			}
+			#employeeTable td{
+				border: 1px solid gray;
+			}
+			#employeeTable th{
+				border: 1px solid gray;
+			}
+			#formDiv{
+				width: 250px;
+				padding: 0 5px 0 5px;
+				border: 1px solid gray;
+				margin: 50px auto;
+			}
+			#msg{
+				border: 1px solid #ccc;
+				width: 200px;
+				height: 100px;
+				margin: 0 auto;
+				margin-bottom: 100px;
+				text-align: left;
+				line-height: 30px;
+			}
+		</style>
+	</head>
+	<body>
+		<script>
+			window.onload = function(){
+				 function delA (){
+						var tr = this.parentNode.parentNode;
+						var name = tr.children[0].innerHTML;
+						if(confirm("确认删除" + name + "吗?")){
+							tr.parentNode.removeChild(tr);
+						}
+						//点击超链接会默认跳转,return false 可以阻止跳转
+						return false;
+					};
+				// 点击超链接后删除一个员工信息
+				var Alla = document.getElementsByTagName("a");
+				// 为每个链接绑定一个点击事件
+				for(var i=0;i<Alla.length;i++){
+					Alla[i].onclick = delA;
+					
+					
+				}
+				// 为提交按钮绑定点击事件
+				var addEmpButton = document.getElementById("addEmpButton");
+				addEmpButton.onclick = function(){
+					//获取添加的员工信息
+					var name = document.getElementById("empName").value;
+					var email = document.getElementById("email").value;
+					var salary = document.getElementById("salary").value;
+					alert(name+"  "+email+"  "+salary);
+					//创建一个tr
+					var tr = document.createElement("tr");
+					// 设置tr中的内容
+					tr.innerHTML = "<td>"+name+"</td>"+
+									"<td>"+email+"</td>"+
+									"<td>"+salary+"</td>"+
+									"<td><a href=''>delete</a></td>";
+					//获取创建的tr中的a并为其绑定点击事件
+					tr.getElementsByTagName("a")[0].onclick = delA;
+					// 获取table中的tbody
+					var employeeTable = document.getElementById("employeeTable");
+					var tbody = employeeTable.getElementsByTagName("tbody")[0];
+					tbody.appendChild(tr);
+				}
+			};
+		</script>
+		<table id="employeeTable">
+			<tr>
+				<th>name</th>
+				<th>email</th>
+				<th>salary</th>
+				<th>&nbsp;</th>
+			</tr>
+			<tr>
+				<td>Tom</td>
+				<td>Tom@.com</td>
+				<td>100</td>
+				<td><a href="" id="01">delete</a></td>
+			</tr>
+			<tr>
+				<td>Bob</td>
+				<td>Bob@.com</td>
+				<td>300</td>
+				<td><a href="" id="02">delete</a></td>
+			</tr>
+			<tr>
+				<td>Sam</td>
+				<td>Sam@.com</td>
+				<td>200</td>
+				<td><a href="" id="03">delete</a></td>
+			</tr>
+		</table>
+		<div id="formDiv">
+			<h4>添加新员工: </h4>
+			<table >
+				<tr>
+					<td class="word">name: </td>
+					<td class="inp">
+						<input type="text" name="empName" id="empName" />
+					</td>
+				</tr>
+				<tr>
+					<td class="word">email: </td>
+					<td class="inp">
+						<input type="text" name="email" id="email" />
+					</td>
+				</tr>
+				<tr>
+					<td class="word">salary: </td>
+					<td class="inp">
+						<input type="text" name="salary" id="salary" />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center">
+						<button id="addEmpButton">submit</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div id="msg">
+			<strong>
+				输入name email salary三个值,然后点击submit,也可以点击 delete 删除信息.
+			</strong>
+		</div>
+	</body>
+</html>

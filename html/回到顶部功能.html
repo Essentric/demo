@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			#box{
+				width: 1500px;
+				margin: 0 auto;
+			}
+			#backTop img{
+				/*background: url(../img/top.png);*/
+				width: 40px;
+				height: 80px;
+				bottom: 0;
+				left: 50%;
+				margin-left: 600px;
+				position: fixed;
+				cursor: pointer;
+			}
+			#backTop img:hover{
+				background-color: #eee;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function(){
+				var timer ;
+				isTop = true;
+				var backTop = document.getElementById("backTop");
+				var pageClietHeight = document.documentElement.clientHeight;
+//				alert(pageClietHeight);
+				window.onscroll = function(){
+//					alert("测试")
+					var scrollTop = document.documentElement.scrollTop||document.body.scrollTop	
+					if(scrollTop >= pageClietHeight){
+						backTop.style.display = "block";
+					}else{
+						backTop.style.display = "none";
+					}
+					// 如果在回到顶部的过程中用户滚动了滚动条,则清除定时器
+					if (!isTop) {
+				      clearInterval(timer);
+				    };
+				    isTop = false;
+				}
+				backTop.onclick = function(){
+//					alert("测试一下");
+					timer = setInterval(function(){
+						//document.documentElement.scrollTop 获取滚动条垂直滚动的距离
+						var scrollTop = document.documentElement.scrollTop||document.body.scrollTop;
+						var speed = scrollTop/5;
+						document.documentElement.scrollTop=document.body.scrollTop = scrollTop - speed;
+						if(scrollTop == 0){
+						clearInterval(timer);
+						}
+						isTop = true;
+					},30)
+					
+				};
+			}
+		</script>
+	</head>
+	<body>
+		<div id="box">
+			<img src="../img/bg.png" id="bg" />
+		</div>
+		<div id="backTop" style="display: none;">
+			<img src="../img/top.png"/ title="回到顶端">
+		</div>
+	</body>
+</html>

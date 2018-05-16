@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			
+			#box{
+				width: 100px;
+				height: 100px;
+				background-color: red;
+				position: absolute;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function(){
+				var box = document.getElementById("box");
+				var btn1 = document.getElementById("btn1");
+				// 定义一个定时器标识
+				var timer;
+				btn1.onclick = function(){
+					clearInterval(timer);
+					timer = setInterval(function(){
+						// 获取box原来的left值
+						var oldValue = parseInt(getStyle(box,"left"));
+						// 在旧值的基础上增加
+						var newValue = oldValue + 10;
+						if(newValue > 800){
+							newValue = 800;
+						}
+						box.style.left = newValue + "px";
+						if(newValue == 800){
+							// 关闭定时器
+							clearInterval(timer);
+						}
+					},50);
+				};
+			};
+			// 定义一个函数用于获取指定元素的当前样式
+			// 参数: 1.obj 要获取样式的元素  ; 2.name 要获取的样式名
+			function getStyle(obj , name){
+				
+				if(window.getComputedStyle){
+					//正常浏览器的方式，具有getComputedStyle()方法
+					return getComputedStyle(obj , null)[name];
+				}else{
+					//IE8的方式，没有getComputedStyle()方法
+					return obj.currentStyle[name];
+				}
+				
+			}
+		</script>
+	</head>
+	<body>
+		<button id="btn1">点我移动DIV</button>
+		<br /><br />
+		<div id="box"></div>
+	</body>
+</html>
