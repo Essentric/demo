@@ -3,112 +3,140 @@
 	<head>
 		<meta charset="utf-8"/>
 		<title></title>
-		<style type="text/css">
+		<link rel="stylesheet" type="text/css" href="css/animate.css">
+		<style>
 			*{
+				padding: 0;
+				margin: 0;
 				list-style: none;
 				text-decoration: none;
+				color: #fff;
 			}
-			#nav {
-				margin: 100px auto;
+			body{
+				/* border: 1px solid #0f0; */
+				display: flex;
+				min-height: 768px;
+				align-items: center;
+				justify-content: center;
 			}
-			#nav > ul {
-				/*border: 2px solid red;*/
-				width: 200px;
-				margin: 0 auto;
-			    border-radius:10px;
-			    background:linear-gradient(to bottom,#efefef,#bbbbbb);
-			    padding:0 20px;
-			    /*display:inline-table;*/
-			    position:relative;  
-			    box-shadow:1px 1px 3px #666;
+			.nav{
+				/* border: 1px solid #f00; */
+				display: flex;
+				min-width: 20em;
+				/* min-height: 20em; */
+				flex-direction: column;
 			}
-			#nav ul ul {
-				margin: 0 50px;
-				padding: 0 20px;
-			    display:none;
+			.vip{
+				display: flex;
+				flex-direction: column;
+				align-items: stretch;
+				/* border: 1px solid #f0f; */
 			}
-			#nav ul li a {
-			    display:block;
-			    width: 110px;
-			    margin: 0 auto;
-			    padding:20px 20px;
-			    color:#000;
-			    /*text-decoration:none;*/
-			    font-family:"微软雅黑";
-			    font-size: small;
-			}
-			/*#nav ul li:hover  ul {
-			    display:block;
-			}*/
-			#nav ul li:hover > a {
-			    color:#A52A2A;
-			}
-			#nav ul ul li a {
+			.svip,.vip{
 				text-align: center;
-			    color:red;
-			}   
-			#nav ul ul li a:hover {
-			    background:#8B8378;
 			}
-			/*#nav ul ul ul {
-			    width:100%;
-			    position:absolute;
-			    left:100%;
-			    top:50%;
-			}*/
-			
+			.svip>li,.vip>a{
+				padding: .5em 0;
+				margin-top: .2em;
+				border: 1px solid #000;
+				border-radius: 5px;
+				box-shadow: 5px 10px 10px #383F45;
+			}
+			.text-a{
+				background: linear-gradient(#84929B, #5D6770);
+			}
+			.text-a:hover{
+				-webkit-animation-name: rubberBand;
+			 	animation-name: rubberBand;
+				-webkit-transform-origin: center bottom;
+				transform-origin: center bottom;
+			}
+			.link-a:hover{
+				cursor: pointer;
+				-webkit-animation-name: bounce;
+			 	animation-name: bounce;
+				-webkit-transform-origin: center bottom;
+				transform-origin: center bottom;
+				background: linear-gradient(#9FD527, #6FAF1A);
+			}
+			.svip>li{
+				/* background: linear-gradient(#9FD527, #6FAF1A); */
+				background: #333A42;
+				/* width: 95%; */
+			}
 		</style>
-		<script type="text/javascript">
-			window.onload = function(){
-				var vip = document.getElementsByClassName("vip");
-				var svip = document.getElementsByClassName("svip");
-//				alert(svip);
-				for(var i=0;i<vip.length;i++){
-					vip[i].id = i;
-					vip[i].onclick = function(){
-							if(svip[this.id].style.display == "block"){
-							svip[this.id].style.display = "none";
-						}else{
-							svip[this.id].style.display = "none";
-							for(var j=0;j<vip.length;j++){
-							svip[j].style.display = "";
-							}
-							svip[this.id].style.display = "block";
-						}
-						
-						
-					}
-				}
-			}
-		</script>
 	</head>
 	<body>
-		<div id="nav">
-			<ul>
-				<li class="vip"><a href="#">1.样式相关操作</a>
-					<ul class="svip">
-						<li><a href="html/DIV跟随鼠标移动.html">跟随鼠标移动</a></li>
-						<li><a href="html/鼠标滚轮改变DIV样式.html">鼠标滚轮事件</a></li>
-						<li><a href="html/显示鼠标坐标.html">显示鼠标坐标</a></li>
+		<!-- <div id="nav"> -->
+			<ul class="nav">
+				<li class="vip">
+					<a href="#" class="text-a animated">1.样式相关操作</a>
+					<ul class="svip list-1" style="display: none;">
+						<li class="link-a animated bounceInLeft"><a href="html/DIV跟随鼠标移动.html">跟随鼠标移动</a></li>
+						<li class="link-a animated bounceInRight"><a href="html/鼠标滚轮改变DIV样式.html">鼠标滚轮事件</a></li>
+						<li class="link-a animated bounceInLeft"><a href="html/显示鼠标坐标.html">显示鼠标坐标</a></li>
 						<!--<li><a href="拖拽.html">鼠标拖拽图片</a></li>-->
 					</ul>
 				</li>
-				<li class="vip"><a href="#">2.定时器的应用</a>
-					<ul class="svip">
-						<li><a href="html/定时器3.html">简单的动画</a></li>
-						<li><a href="html/回到顶部功能.html">回到顶部功能</a></li>
-						<li><a href="html/轮播图.html">轮播图功能</a></li>
+				<li class="vip">
+					<a href="#" class="text-a animated">2.定时器的应用</a>
+					<ul class="svip list-2" style="display: none;">
+						<li class="link-a animated bounceInLeft"><a href="html/定时器3.html">简单的动画</a></li>
+						<li class="link-a animated bounceInRight"><a href="html/回到顶部功能.html">回到顶部功能</a></li>
+						<li class="link-a animated bounceInLeft"><a href="html/轮播图.html">轮播图功能</a></li>
 					</ul>
 				</li>
-				<li class="vip"><a href="#">3.其他功能</a>
-					<ul class="svip">
-						<li><a href="html/表格增删改.html">表单操作</a></li>
-						<li><a href="html/拖拽.html">图片拖拽</a></li>
-						<li><a href="html/全选按钮.html">全选按钮</a></li>
-						<li><a href="html/table标签切换效果.html">table标签切换效果</a></li>
+				<li class="vip">
+					<a href="#" class="text-a animated">3.其他功能</a>
+					<ul class="svip list-3" style="display: none;">
+						<li class="link-a animated bounceInLeft"><a href="html/表格增删改.html">表单操作</a></li>
+						<li class="link-a animated bounceInRight"><a href="html/拖拽.html">图片拖拽</a></li>
+						<li class="link-a animated bounceInLeft"><a href="html/全选按钮.html">全选按钮</a></li>
+						<li class="link-a animated bounceInRight"><a href="html/table标签切换效果.html">table标签切换效果</a></li>
 					</ul>
 				</li>
 			</ul>
-		</div>
+		<!-- </div> -->
 	</body>
+	<script src="js/tools.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			var text_a = document.getElementsByClassName("text-a");
+			var list_1 = document.getElementsByClassName("list-1")[0];
+			var list_2 = document.getElementsByClassName("list-2")[0];
+			var list_3 = document.getElementsByClassName("list-3")[0];
+			var link_a = document.getElementsByClassName("link-a");
+			for (var i = 0; i < text_a.length; i++) {
+				(function (i) {
+					text_a[i].onclick = function () {
+
+						if (i == 0) {
+							// toggleClass(this,'bounce');
+							list_1.style.display == 'none' ? list_1.style.display = 'block' : list_1.style.display = 'none';
+							list_2.style.display = 'none';
+							list_3.style.display = 'none';
+						}else if(i == 1){
+							// toggleClass(this,'bounce');
+							list_1.style.display = 'none';
+							list_2.style.display == 'none' ? list_2.style.display = 'block' : list_2.style.display = 'none';
+							list_3.style.display = 'none';
+						}else {
+							// toggleClass(this,'bounce');
+							list_1.style.display = 'none';
+							list_2.style.display = 'none';
+							list_3.style.display == 'none' ? list_3.style.display = 'block' : list_3.style.display = 'none';
+						}
+					}
+				})(i);
+			}
+			for (var i = 0; i < link_a.length; i++) {
+				(function (i) {
+					link_a[i].onmouseover = function () {
+						removeClass(this,'bounceInLeft');
+						removeClass(this,'bounceInRight');
+					}
+				}(i))
+			}
+		}
+	</script>
 </html>
