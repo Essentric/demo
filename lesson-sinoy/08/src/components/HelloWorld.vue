@@ -12,7 +12,11 @@
         <el-col :span="12">
           <el-row>
             <el-col :span="16">
+<<<<<<< HEAD
               <el-input v-model="field" placeholder="请输入搜索内容"></el-input>
+=======
+              <el-input v-model="$store.state.field" placeholder="请输入搜索内容"></el-input>
+>>>>>>> daf93dd0e625c78ded9fe7dff85b01ea5d2a5a80
             </el-col>
             <el-col :span="8">
               <el-button type="info" icon="el-icon-search" @click="handleSearch">查找</el-button>
@@ -21,7 +25,11 @@
         </el-col>
       </el-row>
       <el-table
+<<<<<<< HEAD
         :data=personData
+=======
+        :data=$store.state.personData
+>>>>>>> daf93dd0e625c78ded9fe7dff85b01ea5d2a5a80
         highlight-current-row>
         <el-table-column
           type="index">
@@ -42,11 +50,19 @@
           <template slot-scope="scope">
             <el-button
               size="mini"
+<<<<<<< HEAD
               @click="handleEdit(scope.row)">编辑</el-button>
             <el-button
               size="mini"
               type="danger"
               @click="handleDelete(scope.row)">删除</el-button>
+=======
+              @click="handleEdit(scope.row, scope.$index)">编辑</el-button>
+            <el-button
+              size="mini"
+              type="danger"
+              @click="handleDelete(scope.$index)">删除</el-button>
+>>>>>>> daf93dd0e625c78ded9fe7dff85b01ea5d2a5a80
           </template>
         </el-table-column>
       </el-table>
@@ -60,6 +76,7 @@ import operateDialog from '@/components/operateDialog'
 export default {
   name: 'HelloWorld',
   components: { operateDialog },
+<<<<<<< HEAD
   computed: {
     personData () {
       return this.$store.getters.filterPerson
@@ -77,6 +94,10 @@ export default {
     handleSearch () {
       this.$store.commit('handleSearch')
     },
+=======
+  methods: {
+    handleSearch () {},
+>>>>>>> daf93dd0e625c78ded9fe7dff85b01ea5d2a5a80
     handleAddClick () {
       this.$store.commit('toggleDialogValue', {
         flag: 'add',
@@ -92,22 +113,38 @@ export default {
         roleList: []
       })})
     },
+<<<<<<< HEAD
     handleEdit (row) {
+=======
+    handleEdit (row, index) {
+>>>>>>> daf93dd0e625c78ded9fe7dff85b01ea5d2a5a80
       this.$store.commit('toggleDialogValue', {
         title: '编辑用户',
         flag: 'edit',
         dialogValue: true,
+<<<<<<< HEAD
         id: row.id
       })
       this.$store.commit('editPerson')
     },
     handleDelete (row) {
+=======
+        index: index
+      })
+      this.$store.commit('editPerson')
+    },
+    handleDelete (index) {
+>>>>>>> daf93dd0e625c78ded9fe7dff85b01ea5d2a5a80
       this.$confirm('确定要删除这个用户吗?', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
+<<<<<<< HEAD
         this.$store.commit('deletePerson', row.id)
+=======
+        this.$store.commit('deletePerson', index)
+>>>>>>> daf93dd0e625c78ded9fe7dff85b01ea5d2a5a80
         this.$message({
           type: 'success',
           message: '成功删除用户!'

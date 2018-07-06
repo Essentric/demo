@@ -9,7 +9,7 @@ $().ready(function () {
     $("#btn-left")[0].style.top = (($(".outer")[0].offsetHeight - $("#btn-left")[0].offsetHeight) / 2) + "px";
     $("#btn-right")[0].style.top = (($(".outer")[0].offsetHeight - $("#btn-right")[0].offsetHeight) / 2) + "px";
     $(".nav-a")[0].style.left = (($(".outer")[0].offsetWidth - $(".nav-a")[0].offsetWidth) / 2) + "px";
-    
+
     $(".circle")[index].style.background = "#187EC0";
 
     // 为每个圆点绑定事件

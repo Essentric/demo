@@ -4,76 +4,59 @@
     <meta charset="UTF-8">
     <title>多层菜单</title>
     <style>
-        /**{*/
-            /*padding: 0;*/
-            /*margin: 0;*/
-            /*list-style: none;*/
-            /*box-sizing: border-box;*/
-            /*text-decoration: none;*/
-        /*}*/
+        *{
+           padding: 0;
+           margin: 0;
+           list-style: none;
+           box-sizing: border-box;
+           text-decoration: none;
+        }
         html,
         body{
             width: 100%;
         }
-        /*.container{*/
-            /*text-align: center;*/
-        /*}*/
-        .nav{
+        .container{
+           text-align: center;
+        }
+        .container>.nav{
             display: inline-block;
             padding: 0 50px;
-            background: #454B54;
+        }
+        .container>.nav .nav-li{
+            position: relative;
+            float: left;
+        }
+        .container>.nav>.nav-li>ul{
+            left: -2px;
+        }
+        .container>.nav>.nav-li>ul ul{
+            top: 0;
+            left: 100px;
         }
         .nav-li{
-            float: left;
             text-align: center;
             background: #F6F6F6;
             margin: 0 2px;
             width: 100px;
         }
-        .nav-li:hover {
+        .nav ul{
+            display: none;
+            position: absolute;
+        }
+        .nav-li:hover{
             cursor: pointer;
         }
-        .nav-li:hover .nav-:last-child{
+        .nav-li:hover>ul{
             display: block;
         }
         .nav-a{
             font-size: 14px;
             line-height: 60px;
         }
-        .nav-{
-            display: none;
-            width: 156px;
-            background: #F6F6F6;
-        }
-        .nav-li-{
-            text-align: center;
-            background: #F6F6F6;
-        }
-        .nav-li-:hover{
-            background: #3C9FE8;
-        }
-        .nav-a-{
-            font-size: 20px;
-            line-height: 60px;
-        }
     </style>
 </head>
 <body>
     <div class="container">
-        <!--<ul class="nav">-->
-            <!--<li class="nav-li">-->
-                <!--<a class="nav-a" href="#">link1</a>-->
-            <!--</li>-->
-            <!--<li class="nav-li">-->
-                <!--<a class="nav-a" href="#">link4</a>-->
-            <!--</li>-->
-            <!--<li class="nav-li">-->
-                <!--<a class="nav-a" href="#">link3</a>-->
-            <!--</li>-->
-            <!--<li class="nav-li">-->
-                <!--<a class="nav-a" href="#">link2</a>-->
-            <!--</li>-->
-        <!--</ul>-->
     </div>
     <script src="lib/jquery-1.12.4.js"></script>
     <script>
@@ -82,9 +65,9 @@
                 {id:1, name:"Link1", pid:0},
                 {id:2, name:"Link2.1", pid:5},
                 {id:3, name:"Link1.1", pid:1},
-                {id:4, name:"Link2.2.1", pid:2},
+                {id:4, name:"Link2.1.1", pid:2},
                 {id:5, name:"Link2", pid:0},
-                {id:6, name:"Link2.2.2", pid:2},
+                {id:6, name:"Link2.1.2", pid:2},
                 {id:7, name:"Link2.2", pid:5},
                 {id:8, name:"Link3.1", pid:10},
                 {id:9, name:"Link3.1.1", pid:8},
@@ -95,17 +78,18 @@
                 {id:14, name:"Link1.3", pid:1},
                 {id:15, name:"Link4.2", pid:16},
                 {id:16, name:"Link4", pid:0},
-                {id:17, name:"Link1.2.1", pid:11}
+                {id:17, name:"Link1.2.1", pid:11},
+                {id:18, name:"Link2.1.2.1", pid:6}
             ];
             var menus = "";
             // 生成html结构
             function getData(array, id) {
 
                 var arr = childMenu(array,id);
-                menus += "<ul>";
+                menus += "<ul class='nav'>";
                 for (var i in arr) {
                     console.log(arr[i]);
-                    menus += "<li><a href='javascript:;'>" + arr[i].name + "</a>";
+                    menus += "<li class='nav-li'><a href='javascript:;' class='nav-a'>" + arr[i].name + "</a>";
                     getData(array, arr[i].id);
                     menus += "</li>";
                     // 生成子菜单结构
