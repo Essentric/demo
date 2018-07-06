@@ -1,0 +1,132 @@
+/*重置默认样式*/
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+ul,li {
+	list-style: none;
+}
+a {
+	text-decoration: none;
+}
+/*清除浮动*/
+.clear:before,
+.clear:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+.container{
+	display: inline-block;
+	background: #39A6EB;
+	padding: 10px;
+}
+.content {
+	margin: 0 auto;
+	border: 1px solid #000;
+	width: 450px;
+	background: #E1F2FC;
+}
+.active-normal {
+	border-right: 1px solid #589CC9;
+	border-bottom: 1px solid #589CC9;
+	background: #89CAF4;
+}
+.active-code {
+	border-left: 1px solid #589CC9;
+	border-bottom: 1px solid #589CC9;
+	background: #89CAF4;
+}
+.normal-login,
+.qr-code-login {
+	font-size: 20px;
+	color: #000;
+	float: left;
+	width: 50%;
+	line-height: 50px;
+	text-align: center;
+}
+.login-toggle{
+	margin-bottom: 45px;
+}
+.normal-login-ul {
+	text-align: center;
+}
+.detail,.ewm{
+	text-align: center;
+}
+.ewm{
+	margin-top: 36px;
+}
+form {
+	text-align: center;
+}
+form>li {
+	text-align: center;
+	margin-top: 15px;
+}
+form input {
+	width: 350px;
+	height: 48px;
+	line-height: 48px;
+    border: 1px solid #c8ccd5;
+}
+.btn-login{
+	color: #fff;
+	border: 0;
+	font-size: 20px;
+	background: #79B1D4;
+	letter-spacing: 10px;
+}
+.verify {
+	display: inline-block;
+	width: 350px;
+	line-height: 44px;
+	border: 1px solid #aaa;
+	background: #E1F2FC;
+	/*使用 ie-css3.htc 的前提条件*/
+	position: relative;
+	z-index: 2;
+
+	border-radius: 50px;
+	/*解决IE8不支持border-radius属性*/
+	behavior: url("pie.htc");
+	text-align: center;
+	margin-bottom: 15px;
+	font-size: 14px;
+	color: #aaa;
+}
+.link-ul{
+	margin-top: 30px;
+	text-align: center;
+}
+.link-ul>li{
+	color: #C6D4D7;
+	display: inline-block;
+	line-height: 50px;
+}
+.link-ul a{
+	color: #4E6D99;
+	font-size: 14px;
+}
+.vertical{
+	margin: 0 10px;
+}
+.wygj,.yxds{
+    font-weight: bold;
+	color: #576AA4;
+}
+#mail,#password {
+    padding-left: 40px;
+	line-height: 48px;
+    background-repeat: no-repeat;
+}
+#mail{
+	background-image: url("../imgs/icons.png");
+    background-position: 5px 0;
+}
+#password{
+	background-image: url("../imgs/icons.png");
+    background-position: 5px -45px;
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge" >
+  <title>登录</title>
+  <link rel="stylesheet" href="css/login-css.css">
+  <script src="libs/jquery-1.12.4.js"></script>
+  <script src="libs/placeholder.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="content">
+      <div class="login-toggle clear">
+        <a class="normal-login" href="#">普通登录</a>
+        <a class="qr-code-login active-code" href="#">二维码登录</a>
+      </div>
+
+      <ul class="normal-login-ul" style="display: block">
+        <form class="login-form" action="#">
+          <li><input id="mail" type="email" name="email" placeholder=" 邮 箱"></li>
+          <li><input id="password" type="password" name="password"
+          placeholder=" 密 码"></li>
+          <li><span class="verify">>>> 请依次点击"敏" "享" "昔"完成验证 >>></span></li>
+          <li><input class="btn-login" type="button" value="登录"></li>
+        </form>
+      </ul>
+      <ul class="login-erweima" style="display: none">
+        <li class="detail">
+          使用<a class="wygj" href="#"> 网易账号管家 </a> 或 <a class="yxds" href="#"> 邮箱大师 </a>扫一扫快速登录
+        </li>
+        <li class="ewm"><img src="imgs/erweima.png" alt=""></li>
+      </ul> 
+      <ul class="link-ul clear">
+        <li><a href="">忘记密码?</a><span class="vertical">|</span><a href="">注册</a><span class="vertical">|</span><a href="">关于网易邮箱账号</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    $().ready(function () {
+      //  解决IE8不支持 placeholder 属性
+      $('input[placeholder]').placeholder();
+
+      $(".normal-login").click(function() {
+        $(this).removeClass('active-normal');
+           $(".normal-login-ul").show();
+           $(".login-erweima").hide();
+        $(".qr-code-login").addClass('active-code');
+      });
+
+      $(".qr-code-login").click(function() {
+        $(this).removeClass('active-code');
+           $(".login-erweima").show();
+           $(".normal-login-ul").hide();
+        $(".normal-login").addClass('active-normal');
+      });
+    })
+  </script>
+</body>
+</html>
