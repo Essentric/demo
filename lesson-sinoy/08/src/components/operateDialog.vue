@@ -1,12 +1,8 @@
 <template>
   <el-dialog
   :visible.sync=$store.state.dialogFormVisible
-<<<<<<< HEAD
-  :fullscreen="true" width="40%">
-=======
   :fullscreen="true" width="40%"
   :close-on-click-modal=false>
->>>>>>> daf93dd0e625c78ded9fe7dff85b01ea5d2a5a80
     <template slot="title">{{$store.state.title}}</template>
     <el-form :model="getForm" ref="getForm">
       <el-form-item label="登录名" prop="loginName"
@@ -49,10 +45,7 @@
 <script>
 export default {
   name: 'operateDialog',
-<<<<<<< HEAD
-=======
   props: ['data'],
->>>>>>> daf93dd0e625c78ded9fe7dff85b01ea5d2a5a80
   data () {
     return {
       formLabelWidth: '100px',
@@ -60,14 +53,6 @@ export default {
     }
   },
   computed: {
-<<<<<<< HEAD
-    getForm () {
-      return this.$store.getters.setForm
-    }
-  },
-  methods: {
-    // 重置
-=======
     getForm: {
       get: function () {
         return this.$store.state.form
@@ -78,7 +63,6 @@ export default {
     }
   },
   methods: {
->>>>>>> daf93dd0e625c78ded9fe7dff85b01ea5d2a5a80
     reset () {
       this.$store.commit('clearForm', {data: JSON.stringify({
         loginName: '',
@@ -90,17 +74,9 @@ export default {
       })})
       this.$refs.getForm.resetFields()
     },
-<<<<<<< HEAD
-    // 取消
     handleCancle () {
       this.$store.commit('toggleDialogValue', false)
     },
-    // 确定
-=======
-    handleCancle () {
-      this.$store.commit('toggleDialogValue', false)
-    },
->>>>>>> daf93dd0e625c78ded9fe7dff85b01ea5d2a5a80
     handleSure (form) {
       this.$refs.getForm.validate((valid) => {
         if (valid) {

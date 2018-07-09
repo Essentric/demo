@@ -1,18 +1,18 @@
 <template>
   <el-container>
     <el-header>
-      <h3>我的购物车({{goodsData.length}})</h3>
-      <a href="javascript:;" class="btn-edit">编辑</a>
+      <div class="my-header">
+        <h3>我的购物车({{getCount}})</h3>
+        <a href="javascript:;" class="btn-edit">编辑</a>
+      </div>
     </el-header>
     <el-main>
-      <el-row class="goods" v-for="(goods, key) in goodsData" :key="key">
+      <el-row class="goods" v-for="(stores, key) in dataInfo" :key="key">
         <el-col :span="24" class="store-name">
           <el-row>
             <el-col :span="12">
-              <el-checkbox-group v-model="goods.goodsList">
-                <el-checkbox></el-checkbox>
-              </el-checkbox-group>
-              <a href="javascript:;">{{goods.storeName}} ></a>
+              <input type="checkbox" v-model="stores.storeSelect" @change="changeStoresSelect(stores.storeSelect, stores)">
+              <a href="javascript:;">{{stores.storeName}} ></a>
             </el-col>
             <el-col :span="6" :offset="6" style="text-align:right;padding-right:1em">
               <a href="javascript:;" class="get-coupon">领券</a>
@@ -21,20 +21,23 @@
             </el-col>
           </el-row>
         </el-col>
-        <el-col :span="24" class="goods-info">
+        <el-col :span="24" class="goods-info" v-for="(goods, index) in stores.goods" :key="index">
           <el-col :span="8" class="pic">
-            <el-checkbox-group v-model="goods.goodsList" class="checkbox">
-              <el-checkbox></el-checkbox>
-            </el-checkbox-group>
+            <input class="goods-checkbox" type="checkbox" v-model="goods.goodsSelect" @change="changeGoodsSelect(goods.goodsSelect, stores)">
             <a href="javascript:;" style="margin-left:2em;width:100%;height:100%"><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530945037524&di=914d7711636e8c7fb7cf8702372b02d6&imgtype=0&src=http%3A%2F%2Fimg14.360buyimg.com%2Fn4%2Fg7%2FM03%2F05%2F12%2FrBEHZlBJyNYIAAAAAAFJgkuWxI0AABFkgG4mrMAAUma420.jpg" alt=""></a>
           </el-col>
           <el-col :span="16" class="desc" style="padding-right:1em">
             <a href="javascript:;">
               <p>{{goods.description}}</p>
-              <p>
-                <span style="color: #f00">￥ {{goods.price}}</span>
-                <span style="float: right">x {{goods.count}}</span>
-              </p>
+              <!-- <p style="position:absolute;display:block;bottom: .5em"> -->
+                <span style="color: #f00;position:absolute;bottom: .5em">￥ {{goods.price}}</span>
+                <!-- <span style="position:absolute;right: 1em;bottom: .5em">x {{goods.count}}</span> -->
+                <el-input-number style="position:absolute;right: 1em;bottom: .5em"
+                :min="1"
+                size="mini"
+                v-model="goods.count"
+                @change="changeCount(index)"></el-input-number>
+              <!-- </p> -->
             </a>
           </el-col>
         </el-col>
@@ -42,13 +45,11 @@
       <div class="my-submit">
         <el-row class="submit">
           <el-col :span="4">
-            <el-checkbox-group>
-              <el-checkbox>全选</el-checkbox>
-            </el-checkbox-group>
+            <input type="checkbox" v-model="selectAll" @change="changeAllSelect(selectAll)">
           </el-col>
           <el-col :span="20" style="text-align:right">
-            <span>合计: <span style="color: #f00">￥998</span></span>
-            <a href="javascript:;" style="height:100%;margin-left: 1em;padding: 1em 2em;border:1px solid #f00; background: orange; color:#fff">结算</a>
+            <span>合计: <span style="color: #f00">￥{{totalPrice}}</span></span>
+            <a href="javascript:;" style="margin-left: 1em;padding: 1em 2em;background: orange; color:#fff">结算</a>
           </el-col>
         </el-row>
       </div>
@@ -61,35 +62,129 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      goodsData: [{
+      totalPrice: 0,
+      selectAll: false,
+      dataInfo: [{
+        storeSelect: false,
         storeName: '杂七杂八批发生活',
-        description: '双肩包男士背包男韩版潮旅行电脑男潮包PU时尚潮流皮休闲学生书包',
-        price: 99.8,
-        count: 1,
-        goodsList: []
+        goods: [{
+          goodsSelect: false,
+          description: '双肩包男士背包男韩版潮旅行电脑男潮包PU时尚潮流皮休闲学生书包',
+          price: 99.8,
+          count: 1
+        }, {
+          goodsSelect: false,
+          description: '双肩包男士背包男韩版潮旅行电脑男潮包PU时尚潮流皮休闲学生书包',
+          price: 99.8,
+          count: 1
+        }, {
+          goodsSelect: false,
+          description: '双肩包男士背包男韩版潮旅行电脑男潮包PU时尚潮流皮休闲学生书包',
+          price: 99.8,
+          count: 1
+        }]
       }, {
+        storeSelect: false,
         storeName: '杂七杂八批发生活',
-        description: '双肩包男士背包男韩版潮旅行电脑男潮包PU时尚潮流皮休闲学生书包',
-        price: 99.8,
-        count: 1,
-        goodsList: []
-      }, {
-        storeName: '杂七杂八批发生活',
-        description: '双肩包男士背包男韩版潮旅行电脑男潮包PU时尚潮流皮休闲学生书包',
-        price: 99.8,
-        count: 1,
-        goodsList: []
-      }, {
-        storeName: '杂七杂八批发生活',
-        description: '双肩包男士背包男韩版潮旅行电脑男潮包PU时尚潮流皮休闲学生书包',
-        price: 99.8,
-        count: 1,
-        goodsList: []
+        goods: [{
+          goodsSelect: false,
+          description: '双肩包男士背包男韩版潮旅行电脑男潮包PU时尚潮流皮休闲学生书包',
+          price: 99.8,
+          count: 1
+        }, {
+          goodsSelect: false,
+          description: '双肩包男士背包男韩版潮旅行电脑男潮包PU时尚潮流皮休闲学生书包',
+          price: 99.8,
+          count: 1
+        }]
       }]
     }
   },
-  computed: {},
-  methods: {}
+  watch: {
+    dataInfo: {
+      handler: function (val, old) {
+        this.totalPrice = 0
+        for (const stores of this.dataInfo) {
+          for (const goods of stores.goods) {
+            if (goods.goodsSelect === true) {
+              this.totalPrice += goods.price * goods.count
+            }
+          }
+        }
+      },
+      deep: true
+    }
+  },
+  computed: {
+    getCount () {
+      let count = 0
+      for (const stores of this.dataInfo) {
+        for (const goods of stores.goods) {
+          count += goods.count
+        }
+      }
+      return count
+    }
+  },
+  methods: {
+    changeCount (val, index) {
+      console.log(val)
+      if (val === 1) {
+        this.$message({
+          type: 'warning',
+          message: '不能再少了!',
+          center: true
+        })
+      }
+    },
+    changeGoodsSelect (val, stores) {
+      const flag = stores.goods.every((ele) => {
+        return ele.goodsSelect === true
+      })
+      if (flag === true) {
+        stores.storeSelect = true
+      } else {
+        stores.storeSelect = false
+        this.selectAll = false
+      }
+    },
+    changeStoresSelect (val, stores) {
+      if (val === true) {
+        stores.goods.forEach((element) => {
+          element.goodsSelect = true
+        })
+      } else {
+        stores.goods.forEach((element) => {
+          element.goodsSelect = false
+        })
+      }
+      const flag = this.dataInfo.every((stores) => {
+        return stores.storeSelect === true
+      })
+      if (flag === true) {
+        this.selectAll = true
+      } else {
+        this.selectAll = false
+      }
+    },
+    changeAllSelect (val) {
+      if (val === true) {
+        for (const stores of this.dataInfo) {
+          stores.storeSelect = true
+          for (const goods of stores.goods) {
+            goods.goodsSelect = true
+          }
+        }
+      } else {
+        for (const stores of this.dataInfo) {
+          stores.storeSelect = false
+          for (const goods of stores.goods) {
+            goods.goodsSelect = false
+          }
+        }
+      }
+    }
+  }
 }
 </script>
 
@@ -104,22 +199,28 @@ p {
   margin: 0;
 }
 .el-container {
+  height: 100%;
   width: 100%;
   padding: 0;
 }
 .el-header {
-  position: relative;
+  position: fixed;
+  z-index: 9;
+  top: 0;
   padding: 0;
+  /* margin-bottom: 3em; */
   width: 100%;
   background: #281B35;
 }
 .el-main {
   background: #FAFAFA;
   padding: 0;
+  margin-top: 4.3em;
 }
 .goods {
   background: #fff;
   margin: .5em 0;
+  margin-bottom: 3em;
 }
 .store-name {
   padding: 1em 0;
@@ -140,8 +241,9 @@ p {
   display: inline-block;
   text-align: center;
 }
-.el-checkbox {
-  width: 1.5em;
+.goods-checkbox {
+  position: absolute;
+  top: 50%;
 }
 h3 {
   text-align: center;
@@ -155,13 +257,15 @@ h3 {
   transform: translateY(-50%);
 }
 .my-submit {
+  clear: both;
   position: fixed;
+  z-index: 999;
   bottom: 0;
-  border-top: 1px solid #eee;
   width: 100%;
+  height: 3em;
   background: #fff;
 }
 .submit {
-  padding: 1em 0;
+  padding: 1em 0 1em .5em;
 }
 </style>

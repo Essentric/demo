@@ -18,4 +18,7 @@ export default {
   color: #000;
   font-size: 14px;
 }
+body {
+  margin: 0;
+}
 </style>
