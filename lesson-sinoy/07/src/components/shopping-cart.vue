@@ -3,7 +3,8 @@
     <el-header>
       <div class="my-header">
         <h3>我的购物车({{getCount}})</h3>
-        <a href="javascript:;" class="btn-edit">编辑</a>
+        <a href="javascript:;" class="btn-edit" @click="handleEditAll" v-if="!editAll">编辑</a>
+        <a href="javascript:;" class="btn-edit" @click="handleEditAll" v-if="editAll">确定</a>
       </div>
     </el-header>
     <el-main>
@@ -29,39 +30,39 @@
           <el-col :span="16" class="desc" style="padding-right:1em">
             <a href="javascript:;">
               <p>{{goods.description}}</p>
-              <!-- <p style="position:absolute;display:block;bottom: .5em"> -->
-                <span style="color: #f00;position:absolute;bottom: .5em">￥ {{goods.price}}</span>
-                <!-- <span style="position:absolute;right: 1em;bottom: .5em">x {{goods.count}}</span> -->
-                <el-input-number style="position:absolute;right: 1em;bottom: .5em"
-                :min="1"
-                size="mini"
-                v-model="goods.count"
-                @change="changeCount(index)"></el-input-number>
-              <!-- </p> -->
+              <span style="color: #f00;position:absolute;bottom: .5em">￥ {{goods.price}}</span>
+              <span style="position:absolute;right: 1em;bottom: .5em" v-if="!editAll">x {{goods.count}}</span>
+              <el-input-number style="position:absolute;right: 1em;bottom: .5em"
+              v-if="editAll"
+              :min="0"
+              size="mini"
+              v-model="goods.count"
+              @change="handleChangeCount($event, key, index)"></el-input-number>
             </a>
           </el-col>
         </el-col>
       </el-row>
-      <div class="my-submit">
-        <el-row class="submit">
-          <el-col :span="4">
-            <input type="checkbox" v-model="selectAll" @change="changeAllSelect(selectAll)">
-          </el-col>
-          <el-col :span="20" style="text-align:right">
-            <span>合计: <span style="color: #f00">￥{{totalPrice}}</span></span>
-            <a href="javascript:;" style="margin-left: 1em;padding: 1em 2em;background: orange; color:#fff">结算</a>
-          </el-col>
-        </el-row>
-      </div>
     </el-main>
+    <el-footer style="height: auto;">
+      <el-row class="submit">
+        <el-col :span="4">
+          <input type="checkbox" v-model="selectAll" @change="changeAllSelect(selectAll)">
+        </el-col>
+        <el-col :span="20" style="text-align:right">
+          <span>合计: <span style="color: #f00">￥{{totalPrice.toFixed(2)}}</span></span>
+          <a href="javascript:;" style="margin-left: 1em;padding: 1em 2em;background: orange; color:#fff">结算</a>
+        </el-col>
+      </el-row>
+    </el-footer>
   </el-container>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'shopping-cart',
   data () {
     return {
+      editAll: false,
       totalPrice: 0,
       selectAll: false,
       dataInfo: [{
@@ -75,12 +76,12 @@ export default {
         }, {
           goodsSelect: false,
           description: '双肩包男士背包男韩版潮旅行电脑男潮包PU时尚潮流皮休闲学生书包',
-          price: 99.8,
+          price: 98.8,
           count: 1
         }, {
           goodsSelect: false,
           description: '双肩包男士背包男韩版潮旅行电脑男潮包PU时尚潮流皮休闲学生书包',
-          price: 99.8,
+          price: 97.8,
           count: 1
         }]
       }, {
@@ -89,12 +90,12 @@ export default {
         goods: [{
           goodsSelect: false,
           description: '双肩包男士背包男韩版潮旅行电脑男潮包PU时尚潮流皮休闲学生书包',
-          price: 99.8,
+          price: 96.8,
           count: 1
         }, {
           goodsSelect: false,
           description: '双肩包男士背包男韩版潮旅行电脑男潮包PU时尚潮流皮休闲学生书包',
-          price: 99.8,
+          price: 95.8,
           count: 1
         }]
       }]
@@ -102,7 +103,7 @@ export default {
   },
   watch: {
     dataInfo: {
-      handler: function (val, old) {
+      handler: function () {
         this.totalPrice = 0
         for (const stores of this.dataInfo) {
           for (const goods of stores.goods) {
@@ -127,15 +128,30 @@ export default {
     }
   },
   methods: {
-    changeCount (val, index) {
-      console.log(val)
-      if (val === 1) {
-        this.$message({
-          type: 'warning',
-          message: '不能再少了!',
-          center: true
+    handleChangeCount (val, key, index) {
+      console.log(val, key, index)
+      if (val === 0) {
+        this.$confirm('移出购物车?', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.dataInfo[key].goods.splice(index, 1)
+          this.$message({
+            type: 'success',
+            message: '已移除!'
+          })
+        }).catch(() => {
+          this.$message({
+            type: 'warning',
+            message: '操作已取消!'
+          })
+          this.dataInfo[key].goods[index].count = 1
         })
       }
+    },
+    handleEditAll () {
+      this.editAll = !this.editAll
     },
     changeGoodsSelect (val, stores) {
       const flag = stores.goods.every((ele) => {
@@ -216,11 +232,12 @@ p {
   background: #FAFAFA;
   padding: 0;
   margin-top: 4.3em;
+  margin-bottom: 3em;
 }
 .goods {
   background: #fff;
   margin: .5em 0;
-  margin-bottom: 3em;
+  /* margin-bottom: 3em; */
 }
 .store-name {
   padding: 1em 0;
@@ -256,7 +273,8 @@ h3 {
   right: 1em;
   transform: translateY(-50%);
 }
-.my-submit {
+.el-footer {
+  padding: 0;
   clear: both;
   position: fixed;
   z-index: 999;
