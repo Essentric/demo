@@ -1,7 +1,7 @@
 /****************************
          初始化
 ****************************/
-@basefont:16px;
+@basefont:15;
 @width:100%;
 .borderd(@color:#f00){
   border: 1px solid @color;
@@ -35,10 +35,13 @@
 }
 html,
 body {
+  height: @width;
   width: @width;
+  font-size: @basefont;
 }
 .container {
   width: @width;
+  height: @width;
 }
 
 /*************************
@@ -47,46 +50,55 @@ body {
 
 .header {
   width: @width;
-  height: 5rem;
-  .borderd();
-  background: url("../img/header-bg.png");
+  .bg-color(#70C570);
+  .borderd;
+  padding: 1.4rem 0;
 }
 .menu-content {
-  height: 5rem;
+  .colord(#fff);
   position: relative;
   width: @width * 0.8;
-  .borderd(#f0f);
+  // .borderd(#f0f);
   margin: 0 auto;
   .menu-logo {
+    span:first-child {
+      .font-size(2rem);
+      font-weight: bold;
+    };
+    span:last-child {
+      .font-size(1.7rem);
+    };
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 192px;
-    height: 21px;
-    background: url("../img/logo_03.png");
-    //.borderd(#0f0);
+    // .borderd(#0f0);
   }
   .clearfix;
 }
 .menu-ul {
-  .borderd(#000);
-  //height: 5rem;
+  // .borderd(#000);
   height: 100%;
   float: right;
   li {
     float: left;
-    margin: 0 10/16rem;
+    margin: 0 .73rem;
     a {
-      //line-height: 5rem;
       .font-size();
+      font-weight: bold;
       .colord(#fff);
       display: inline-block;
-      padding: 11/16rem 15/16rem 10/16rem 13/16rem;
-      border-style: solid;
-      .bg-color(#6e978e);
+      padding: .74rem .6rem .74rem .6rem;
+      .bg-color(#5FA25D);
       border-radius: 5px;
-      box-shadow: 0 3px 5px rgba(82,139,134,.3);
+      box-shadow: 0 3px 1px #4B8C4C;
 
     }
+    .protfolio {
+      
+    }
   }
+  li:hover>a {
+    .bg-color(#E26C2C);
+    box-shadow: 0 3px 1px #D85B2B;
+  };
 }
