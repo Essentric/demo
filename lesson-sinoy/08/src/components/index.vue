@@ -21,7 +21,7 @@
         </el-col>
       </el-row>
       <el-table
-        :data=personData
+        :data="this.$store.getters.filterPersonData"
         highlight-current-row>
         <el-table-column
           type="index">
@@ -58,47 +58,32 @@
 <script>
 import operateDialog from '@/components/operateDialog'
 export default {
-  name: 'HelloWorld',
+  name: 'index',
   components: { operateDialog },
-  computed: {
-    personData () {
-      return this.$store.getters.filterPerson
-    },
-    field: {
-      get: function () {
-        return this.$store.state.field
-      },
-      set: function (value) {
-        this.$store.commit('setField', value)
-      }
+  data () {
+    return {
+      field: ''
     }
   },
   methods: {
     handleSearch () {
-      this.$store.commit('handleSearch')
+      this.$store.commit('setField', this.field)
     },
     handleAddClick () {
-      this.$store.commit('toggleDialogValue', {
+      this.$store.commit('toggleDialogValue', JSON.stringify({
         flag: 'add',
         title: '新增用户',
         dialogValue: true
-      })
-      this.$store.commit('clearForm', {data: JSON.stringify({
-        loginName: '',
-        userName: '',
-        password: '',
-        tel: '',
-        post: '',
-        roleList: []
-      })})
+      }))
+      this.$store.commit('editPerson')
     },
-    handleEdit (row, index) {
-      this.$store.commit('toggleDialogValue', {
+    handleEdit (row) {
+      this.$store.commit('toggleDialogValue', JSON.stringify({
         title: '编辑用户',
         flag: 'edit',
         dialogValue: true,
-        index: index
-      })
+        id: row.id
+      }))
       this.$store.commit('editPerson')
     },
     handleDelete (index) {

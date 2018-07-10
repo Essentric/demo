@@ -45,7 +45,6 @@
 <script>
 export default {
   name: 'operateDialog',
-  props: ['data'],
   data () {
     return {
       formLabelWidth: '100px',
@@ -53,13 +52,8 @@ export default {
     }
   },
   computed: {
-    getForm: {
-      get: function () {
-        return this.$store.state.form
-      },
-      set: function (value) {
-        this.$store.commit('commitEdit', value)
-      }
+    getForm: function () {
+      return this.$store.state.form
     }
   },
   methods: {
@@ -77,20 +71,19 @@ export default {
     handleCancle () {
       this.$store.commit('toggleDialogValue', false)
     },
-    handleSure (form) {
+    handleSure (formName) {
       this.$refs.getForm.validate((valid) => {
         if (valid) {
           if (this.$store.state.flag === 'add') {
-            this.$store.commit('addPerson', JSON.stringify(form))
-            // this.getForm = form
+            this.$store.commit('addPerson', JSON.stringify(formName))
             this.$message({
               type: 'success',
               message: '成功新增用户!'
             })
             this.$store.commit('toggleDialogValue', false)
           } else if (this.$store.state.flag === 'edit') {
-            this.$store.commit('commitEdit', {data: JSON.stringify(form)})
-            // this.getForm = form
+            console.log(formName)
+            this.$store.commit('commitEdit', JSON.stringify(formName))
             this.$message({
               type: 'success',
               message: '成功编辑用户!'
