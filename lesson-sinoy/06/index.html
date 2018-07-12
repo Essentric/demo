@@ -6,7 +6,9 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>index</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link href="./static/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="./js/jquery-1.12.4.js"></script>
 </head>
 <body>
     <div class="container">
@@ -15,12 +17,12 @@
                 <div class="menu-content">
                     <div class="menu-logo"><span>MODUS</span> <span>versus</span></div>
                     <ul class="menu-ul">
-                        <li><a href="javascript:;">HOME</a></li>
+                        <li><a href="javascript:;" class="menu-active">HOME</a></li>
                         <li><a href="javascript:;">ABOUT</a></li>
                         <li><a href="javascript:;">SERVICES</a></li>
                         <li class="protfolio">
                             <a href="javascript:;">PORTFOLIO</a>
-                            <ul>
+                            <ul class="protfolio-more">
                                 <li>protfolio 2 column page</li>
                                 <li>protfolio 2 column page</li>
                                 <li>protfolio 2 column page</li>
@@ -30,15 +32,213 @@
                         <li><a href="javascript:;">FEATURES</a></li>
                         <li><a href="javascript:;">CONTACTS</a></li>
                         <li><a href="javascript:;">SEARCH</a></li>
-                        <li><a href="javascript:;">SEARCH</a></li>
+                        <li><a href="javascript:;"><i class="fa fa-search"></i></a></li>
                     </ul>
                 </div>
             </div>
-            <!--轮播图-->
-            <div class="header-carousel"></div>
         </div>
-        <div class="main"></div>
-        <div class="footer"></div>
+        <!--轮播图-->
+        <ul class="header-carousel">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <div class="prev">&laquo;</div>
+            <div class="next">&raquo;</div>
+            <ul class="carousel-index">
+                <li class="carousel-index-active"></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </ul>
+        <div class="main">
+            <div class="main-top">
+                <div class="main-top-content">
+                    <div class="view-more">
+                        <span>
+                            <span>Some of our top services</span>
+                            <span>Ut eleifend libero sed neque thoncus consequat,Maecenas tincidunt,augue et rutrum condimetum,libero lectus mattis orci,ut commodo.</span>
+                        </span>
+                        <button class="btn-more">VIEW MORE</button>
+                    </div>
+                    <div class="boxes">
+                        <div class="box1">
+                            <div><img src="./image/poto1.png" alt=""></div>
+                            <p>Quisque id tellus quis risus vehicula
+                                vehicula ut turpis. in eros nulla, placerat
+                                vitae at, vehicula ut nunc.</p>
+                            <button class="btn-read-me">read more</button>
+                        </div>
+                        <div class="box2">
+                            <div><img src="./image/poto2.png" alt=""></div>
+                            <p>Ut eleifend libero sed neque rhoncus
+                                consequat. Maecenas tincidunt, augue
+                                et rutrum condimentum, libero lectus-
+                                mattis orci, ut commodo.</p>
+                            <button class="btn-read-me">read more</button>
+                        </div>
+                        <div class="box3">
+                            <div><img src="./image/poto3.png" alt=""></div>
+                            <p>Vivamus eget ante bibendum arcu
+                                vehicula ultricies. Integer venenatis
+                                mattis nisl, vitae pulvinar dui tempor
+                                non.</p>
+                            <button class="btn-read-me">read more</button>
+                        </div>
+                        <div class="box4">
+                            <div><img src="./image/poto4.png" alt=""></div>
+                            <p>Astehicula ultricies. Integer venenatis
+                                mattis nisl, vitae pulvinar duí tempor
+                                non.</p>
+                            <button class="btn-read-me">read more</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="main-bottom">
+                <div class="main-why">
+                    <div class="main-why-content">
+                        <h1>WHY MODUS VERSUS?</h1>
+                        <P>
+                            capacitance cascading integer reflective interface data development high bus cache dithering transpoder.
+                        </P>
+                    </div>
+                </div>
+                <div class="carousel3D">
+                    <div class="carousel-content">
+                        <div class="pic1"><img src="./image/leftpoto.png" alt=""></div>
+                        <div class="pic2"><img src="./image/midpoto.png" alt=""></div>
+                        <div class="pic3"><img src="./image/potoright.png" alt=""></div>
+                    </div>
+                </div>
+                <div class="main-question">
+                    <div class="main-question-content">
+                        <div class="questions">
+                            <div class="questions-left">
+                                <h3>Why Choose Us ?</h3>
+                                <ul>
+                                    <li><span class="fa fa-arrow-right"></span><a href="javascript:;">Quisque at massa ipsum</a></li>
+                                    <li><span class="fa fa-arrow-right"></span><a href="javascript:;">Maecenas a lorem augue, egestas</a></li>
+                                    <li><span class="fa fa-arrow-right"></span><a href="javascript:;">A Cras vitae felis at lacus eleifend</a></li>
+                                    <li><span class="fa fa-arrow-right"></span><a href="javascript:;">Etiam auctor diam pellentesque</a></li>
+                                    <li><span class="fa fa-arrow-right"></span><a href="javascript:;">Nulla ac massa at dolor</a></li>
+                                    <li><span class="fa fa-arrow-right"></span><a href="javascript:;">Condimentum eleifend vitae vitae</a></li>
+                                </ul>
+                            </div>
+                            <div class="questions-mid">
+                                <p>Curabitur quis nisl in leo euismod venenatis eu in diam. Etiam auctor diam pellentesque lectus <a href="javascript:;">vehicula mattis</a> . Nulla ac massa at dolor condimentum eleifend vitae vitae uma.</p>
+                                <ul>
+                                    <li><img src="./image/image001.jpg" alt=""></li>
+                                    <li><img src="./image/image002.jpg" alt=""></li>
+                                    <li><img src="./image/image003.jpg" alt=""></li>
+                                    <li><img src="./image/image004.jpg" alt=""></li>
+                                </ul>
+                            </div>
+                            <div class="questions-right">
+                                <h3>What client's Say ?</h3>
+                                <div>
+                                    Curabitur quis nisI in leo euismod
+                                    venenatis eu in diam. Etiam ouctor diam
+                                    pellentes que lectus vehicula mattis. Nulla
+                                    ac massa at dolor condimentum
+                                    <p>Jhon Doe</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="jquery">
+                            <div>
+                                <h3>Our Happy Clients</h3>
+                                <img class="jquery-line" src="./image/wq.jpg" alt="">
+                                <span class="jquery-btn">
+                                    <span class="btn-left"><i class="fa fa-chevron-left"></i></span>
+                                    <span class="btn-right"><i class="fa fa-chevron-right"></i></span>
+                                </span>
+                            </div>
+                            <ul>
+                                <li><img src="./image/poto001.jpg" alt=""></li>
+                                <li><img src="./image/poto001.jpg" alt=""></li>
+                                <li><img src="./image/poto001.jpg" alt=""></li>
+                                <li><img src="./image/poto001.jpg" alt=""></li>
+                                <li><img src="./image/poto001.jpg" alt=""></li>
+                                <li><img src="./image/poto001.jpg" alt=""></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="footer-copyright">
+                <div class="copyright-content">
+                    <div class="content-left">
+                        <div class="modus">
+                            <div class="footer-logo"><span>MODUS</span> <span>versus</span></div>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisdng elit. Nam
+                                viverra euismod odio, gravida pellentesque urnai varius vitae.
+                                Sed durlorem, adipiscing in adipisdng et, interdum nec.</p>
+                            <div>
+                                <p class="phone">Phone: <i> 182 2569 5896</i></p>
+                                <p class="e-mail">e-mail: <i> info@modu.versus</i></p>
+                            </div>
+                        </div>
+                        <div class="company">
+                            <p>Company</p>
+                            <ul>
+                                <li><i class="fa fa-angle-right"></i><a href="javascript:;">About</a></li>
+                                <li><i class="fa fa-angle-right"></i><a href="javascript:;">FAQ</a></li>
+                                <li><i class="fa fa-angle-right"></i><a href="javascript:;">Contact</a></li>
+                                <li><i class="fa fa-angle-right"></i><a href="javascript:;">Terms</a></li>
+                                <li><i class="fa fa-angle-right"></i><a href="javascript:;">Privacy</a></li>
+                                <li><i class="fa fa-angle-right"></i><a href="javascript:;">Testimonials</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="content-right">
+                        <div class="community">
+                            <p>Community</p>
+                            <ul>
+                                <li><i class="fa fa-angle-right"></i><a href="javascript:;">Blog</a></li>
+                                <li><i class="fa fa-angle-right"></i><a href="javascript:;">Forum</a></li>
+                                <li><i class="fa fa-angle-right"></i><a href="javascript:;">Support</a></li>
+                                <li><i class="fa fa-angle-right"></i><a href="javascript:;">Newsletter</a></li>
+                            </ul>
+                        </div>
+                        <div class="from-blog">
+                            <p>from the <span>BLOG</span></p>
+                            <div class="box1">
+                                <div><img src="./image/image005.jpg" alt=""></div>
+                                <div>
+                                    <p>Lorem ipsum dolor sit amet, consectetur.
+                                        adipisding elit</p>
+                                    <p class="date">26May.2013</p>
+                                </div>
+                            </div>
+                            <div class="box2">
+                                <div><img src="./image/image005.jpg" alt=""></div>
+                                <div>
+                                    <p>Loremipsumdolor sit amet, consectetur
+                                        adipisding elit </p>
+                                    <p class="date">26 May.2013</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-link">
+                <div class="link-content">
+                    <p>2013 ModusVersus</p>
+                    <div>
+                        <a href="javascript:;"><img src="./image/image-end01.jpg" alt=""></a>
+                        <a href="javascript:;"><img src="./image/image-end02.jpg" alt=""></a>
+                        <a href="javascript:;"><img src="./image/image-end03.jpg" alt=""></a>
+                        <a href="javascript:;"><img src="./image/image-end04.jpg" alt=""></a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
+<script src="./js/carousel.js"></script>
 </html>
