@@ -1,8 +1,7 @@
 <template>
   <el-dialog
   :visible.sync=$store.state.dialogFormVisible
-  :fullscreen="true" width="40%"
-  :close-on-click-modal=false>
+  :fullscreen="true" width="40%">
     <template slot="title">{{$store.state.title}}</template>
     <el-form :model="getForm" ref="getForm">
       <el-form-item label="登录名" prop="loginName"
@@ -57,6 +56,7 @@ export default {
     }
   },
   methods: {
+    // 表单重置
     reset () {
       this.$store.commit('clearForm', {data: JSON.stringify({
         loginName: '',
@@ -71,6 +71,7 @@ export default {
     handleCancle () {
       this.$store.commit('toggleDialogValue', false)
     },
+    // 点击确定之后
     handleSure (formName) {
       this.$refs.getForm.validate((valid) => {
         if (valid) {
@@ -82,7 +83,7 @@ export default {
             })
             this.$store.commit('toggleDialogValue', false)
           } else if (this.$store.state.flag === 'edit') {
-            console.log(formName)
+            // console.log(formName)
             this.$store.commit('commitEdit', JSON.stringify(formName))
             this.$message({
               type: 'success',

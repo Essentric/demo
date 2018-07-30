@@ -5,7 +5,7 @@
       <div style="margin-bottom: 20px;">
         <el-input type="number" placeholder="请输入要生成URL的数量" :min="1" :max="999" v-model="num">
           <template slot="append">
-            <el-button type="primary" @click="createURL(num)">一键生成URL</el-button>
+            <el-button type="primary" @click="createURL">一键生成URL</el-button>
           </template>
         </el-input>
       </div>
@@ -38,11 +38,22 @@ export default {
       urlData: [],
       tableModal: true,
       num: 1,
+      count: 0, //  计数变量，统计递归的次数
     };
   },
   props: ['urlDialogData'],
   computed: {
     ...mapGetters(['authorization']),
+  },
+  watch: {
+    urlDialogData: { // 关闭dialog的时候会将历史数据清空
+      handler(val) {
+        if (!val.dialogTableVisible) {
+          this.urlData = [];
+        }
+      },
+      deep: true,
+    },
   },
   methods: {
     tips() {
@@ -51,49 +62,64 @@ export default {
     onCopy() {
       this.tips();
     },
-    createURL(value) {
-      if (value.length !== 0) {
-        this.urlData = [];
-        const token = this.authorization;
-        this.$http.get('api/url/generate', {
-          params: {
-            survey_id: this.urlDialogData.id,
-            num: this.num,
-          },
-          headers: {
-            Authorization: `Bearer${token}`,
-          },
-        }).then((req) => {
-          req.data.forEach((element, index) => {
-            this.urlData.push({ id: index + 1, url: element.substring(7) });
-            this.num = '1';
-          });
-        }).catch(() => { //  发送链接失败，刷新token
-          this.$alert('获取链接失败,点击刷新重试,或重新登录', '错误', {
-            confirmButtonText: '刷新',
-            callback: (action) => {
-              if (action === 'confirm') { //  如果用户点击刷新
-                this.refreshToken().then(() => {
-                  this.$message({
-                    type: 'success',
-                    message: '刷新成功，请继续操作',
-                  });
-                });
-              }
+    createURL() {
+      this.num = this.num.toString(); // 转换成字符串类型
+      this.num = this.num.replace(/^0*/gi, ''); // 将前面的0去掉
+      const reg = /^[0-9]+$/;
+      if (reg.test(this.num)) { // 判断是否输入的是数字
+        if (this.num > 0 && this.num <= 999) { // 如果是数字，判断是否在1~999以内的数字
+          this.urlData = [];
+          const token = this.authorization;
+          this.$http.get('api/url/generate', {
+            params: {
+              survey_id: this.urlDialogData.id,
+              num: this.num,
             },
+            headers: {
+              Authorization: `Bearer${token}`,
+            },
+          }).then((req) => {
+            req.data.forEach((element, index) => {
+              this.urlData.push({ id: index + 1, url: element.substring(7) });
+              this.num = '1';
+            });
+          }).catch(() => { //  发送链接失败，刷新token
+            //  token已过期或不存在
+            // console.log('刷新token');
+            if (this.count < 1) { // 第一次请求失败,刷新token后重试
+              this.$http.post('api/refresh-token', {}, {
+                headers: {
+                  Authorization: `Bearer${token}`,
+                },
+              }).then((res) => {
+                this.$store.commit('changeAuthorization', res.headers.authorization);
+                this.createURL();
+              }).catch(() => {
+                //  token已过期且不可再刷新
+              });
+              this.count = 0;
+            } else { // 第二次失败,参数拼接有误
+              this.$message({
+                message: '请重试或联系管理员',
+                type: 'error',
+              });
+            }
+            this.count += 1;
           });
+        } else { // 输入数字不在1~999内
+          this.$message({
+            message: '警告哦，请输入1~999内的数字哟',
+            type: 'warning',
+          });
+          this.num = 1;
+        }
+      } else { // 输入不是数字
+        this.$message({
+          message: '警告哦，请输入合适的数字哟',
+          type: 'warning',
         });
+        this.num = 1;
       }
-    },
-    refreshToken() {
-      const token = this.authorization;
-      this.$http.post('api/refresh-token', {}, {
-        headers: {
-          Authorization: `Bearer${token}`,
-        },
-      }).then((req) => {
-        this.$store.dispatch('changeAuthorization', req.headers.authorization);
-      });
     },
   },
 };

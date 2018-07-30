@@ -1,0 +1,50 @@
+.header-title {
+  overflow: hidden;
+}
+.demo-table-expand {
+  font-size: 0;
+    .el-form-item {
+      margin-right: 0;
+      margin-bottom: 0;
+      width: 70%;
+    }
+    label {
+      width: 90px;
+      color: #99a9bf;
+    }
+}
+// .pagination {
+//   padding-top: 20px;
+//   border-top: 1px solid #eee;
+// }
+.el-pagination {
+  position:fixed;
+  width: 100%;
+  left: 0;
+  bottom:60px;
+  z-index:10;
+  padding: 5px 0;
+  background-color: #444444;
+}
+.el-table .success-row {
+  background: #E6EEFB;
+}
+.el-pagination__total,
+.el-pagination__jump {
+  color: #fff;
+}
+.cell {
+  text-align: center;
+}
+// .el-table .success-row {
+//   background: #67c23abb;
+// }
+// .el-table .primary-row {
+//   background: #3ebbddbb;
+// }
+// .el-table .warning-row {
+//   background: #E6A23Cbb;
+// }
+// .el-table .danger-row {
+//   background: #F56C6Cbb;
+// }

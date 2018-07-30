@@ -10,6 +10,15 @@ export default {
 };
 </script>
 
+<style>
+.el-menu-item.is-active {
+  color: #303133;
+}
+.el-menu-item:focus {
+  background-color: transparent;
+}
+</style>
+
 <style lang="scss" scoped>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;

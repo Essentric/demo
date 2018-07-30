@@ -16,7 +16,7 @@ module.exports = {
         // below are local develop
         // changeOrigin: true,
         pathRewrite: {  
-          '^/api': '/'
+          '^/api': '/'  
         }
       },
     },

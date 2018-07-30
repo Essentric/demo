@@ -3,8 +3,8 @@
 import Vue from 'vue';
 import ElementUI from 'element-ui';
 import VueClipboard from 'vue-clipboard2';
-import echarts from 'echarts';
 import 'element-ui/lib/theme-chalk/index.css';
+import 'element-ui/lib/theme-chalk/display.css';
 import axios from 'axios';
 import animate from 'animate.css';
 import App from './App';
@@ -18,7 +18,6 @@ Vue.use(VueClipboard);
 Vue.use(animate);
 
 Vue.prototype.$http = axios;
-Vue.prototype.$echarts = echarts;
 
 /* eslint-disable no-new */
 new Vue({

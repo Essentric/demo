@@ -1,5 +1,5 @@
 export default {
-  getScoreSum(code, _score) {
+  getScoreSum(code, _score) { // 根据分数，类型获取总分
     let scoreSum;
     const score = _score - 0;
     switch (code) {
@@ -44,7 +44,7 @@ export default {
         case 21:
         case 22: scoreSum = 95;
           break;
-        default: break;
+        default: scoreSum = 95;
       }
         break;
       case 'RI': switch (score) {
@@ -88,7 +88,7 @@ export default {
         case 21:
         case 22: scoreSum = 95;
           break;
-        default: break;
+        default: scoreSum = 95;
       }
         break;
       case 'CO': switch (score) {
@@ -133,7 +133,7 @@ export default {
         case 21:
         case 22: scoreSum = 95;
           break;
-        default: break;
+        default: scoreSum = 95;
       }
         break;
       case 'SH': switch (score) {
@@ -183,7 +183,7 @@ export default {
           break;
         case 22: scoreSum = 95;
           break;
-        default: break;
+        default: scoreSum = 95;
       }
         break;
       case 'ME': switch (score) {
@@ -225,7 +225,7 @@ export default {
         case 21:
         case 22: scoreSum = 94;
           break;
-        default: break;
+        default: scoreSum = 94;
       }
         break;
       case 'TW': switch (score) {
@@ -269,7 +269,7 @@ export default {
         case 21:
         case 22: scoreSum = 95;
           break;
-        default: break;
+        default: scoreSum = 95;
       }
         break;
       case 'IM': switch (score) {
@@ -314,7 +314,7 @@ export default {
         case 21:
         case 22: scoreSum = 93;
           break;
-        default: break;
+        default: scoreSum = 93;
       }
         break;
       case 'CF': switch (score) {
@@ -356,7 +356,7 @@ export default {
         case 21:
         case 22: scoreSum = 93;
           break;
-        default: break;
+        default: scoreSum = 93;
       }
         break;
       case 'SP': switch (score) {
@@ -399,14 +399,14 @@ export default {
         case 21:
         case 22: scoreSum = 95;
           break;
-        default: break;
+        default: scoreSum = 95;
       }
         break;
       default: break;
     }
     return scoreSum;
   },
-  getEvaluation(code, scoreSum) {
+  getEvaluation(code, scoreSum) { // 根据总分，类型获取相应评价
     let evaluation;
     switch (code) {
       case 'PL': if (scoreSum >= 0 && scoreSum <= 25) {
@@ -504,39 +504,17 @@ export default {
     const obj = { code, scoreSum, evaluation };
     return obj;
   },
-  getDesc(code) {
-    let description;
-    switch (code) {
-      case 'PL':
-        description = '智多星';
-        break;
-      case 'RI':
-        description = '外联者';
-        break;
-      case 'CO':
-        description = '协调者';
-        break;
-      case 'SH':
-        description = '鞭策者';
-        break;
-      case 'ME':
-        description = '监督者';
-        break;
-      case 'TW':
-        description = '凝聚者';
-        break;
-      case 'IM':
-        description = '实干者';
-        break;
-      case 'CF':
-        description = '善始善终者';
-        break;
-      case 'SP':
-        description = '专家';
-        break;
-      default:
-        break;
-    }
-    return description;
+  getDesc() { // 根据类型获取相应描述
+    const m = new Map();
+    m.set('PL', '智多星');
+    m.set('RI', '外联者');
+    m.set('CO', '协调者');
+    m.set('SH', '鞭策者');
+    m.set('ME', '监督者');
+    m.set('TW', '凝聚者');
+    m.set('IM', '实干者');
+    m.set('CF', '善始善终者');
+    m.set('SP', '专家');
+    return m;
   },
 };

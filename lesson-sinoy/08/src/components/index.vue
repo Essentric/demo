@@ -66,9 +66,11 @@ export default {
     }
   },
   methods: {
+    // 搜索
     handleSearch () {
       this.$store.commit('setField', this.field)
     },
+    // 新增
     handleAddClick () {
       this.$store.commit('toggleDialogValue', JSON.stringify({
         flag: 'add',
@@ -77,6 +79,7 @@ export default {
       }))
       this.$store.commit('editPerson')
     },
+    // 编辑
     handleEdit (row) {
       this.$store.commit('toggleDialogValue', JSON.stringify({
         title: '编辑用户',
@@ -86,6 +89,7 @@ export default {
       }))
       this.$store.commit('editPerson')
     },
+    // 删除
     handleDelete (index) {
       this.$confirm('确定要删除这个用户吗?', {
         confirmButtonText: '确定',
@@ -112,6 +116,7 @@ export default {
 <style>
   .el-header {
     background: #409EFF;
+    line-height: 60px;
   }
   .el-row {
     justify-content: space-around;
